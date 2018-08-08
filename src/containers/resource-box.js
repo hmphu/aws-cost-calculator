@@ -15,12 +15,10 @@ const card = {
 
 class ResourceBox extends Component {
 	renderSingle() {
-		console.log(this.props.active)
 		return (
 			this.props.resource.map((e) => {
-					
 					return (
-						<SingleContainer key={e.id} id={e.id} resource={e.type} data={e.data}/>
+						<SingleContainer key={e.id} id={e.id} resource={e} active = {this.props.active}/>
 					)
 				})
 		)

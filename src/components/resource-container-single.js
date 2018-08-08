@@ -6,13 +6,15 @@ export default class SingleContainer extends Component {
 	}
 
 	renderData() {
+		const propR = this.props;
+		console.log(propR)
+		console.log()
+		// const filterActiveName = 
+		const filterActivePrice = (propR.resource.data.filter((e) => (e.id == propR.active)))[0];
+
 		// .filter to active 
 		return (
-			this.props.data.map((e) => {
-				return(
-					<span key={e.id}>{e.id}{e.s3_standard}</span>
-				)
-			})
+			<p>{propR.resource.type} {filterActivePrice.s3_standard} {filterActivePrice.s3_infrequent}</p>
 		)
 	}
 
@@ -25,3 +27,6 @@ export default class SingleContainer extends Component {
 		
 	}
 }
+
+
+// {propR.resource.data.filter((e) => (e.id === propR.active))}
