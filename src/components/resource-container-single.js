@@ -2,14 +2,21 @@ import React, {Component} from 'react';
 
 import RenderSingleInfo from './renderSingleInfo'
 
+
 const container = {
 	display:'flex',
 	justifyContent:'space-between'
 };
 
-const width = {
-	width:300
+const style = {
+	width:300,
+	textAlign:'center'
 };
+
+const styleInput = {
+	width:300,
+	textAlign:'center'
+}
 
 export default class SingleContainer extends Component {
 	constructor(props) {
@@ -17,23 +24,40 @@ export default class SingleContainer extends Component {
 		this.state = {res1:100, res2:10, res3:100, res4:100}
 	}
 
+	// renderInfo() {
+	// 	if (this.props.header === "true") this.renderHeader();
+
+	// 	else {
+	// 		this.renderData()
+
+	// 	}
+	// }
+
+
 	renderData() {
 		const propR = this.props;
-		console.log(propR)
-		console.log()
-		// const filterActiveName = 
-		const filterActivePrice = (propR.resource.data.filter((e) => (e.id == propR.active)))[0];
-
+		const filterActivePrice = (propR.resource.data.filter((e) => (e.id === propR.active)))[0];
+		// console.log(filterActivePrice)
 		// .filter to active 
 		return (
-			<div style={container}>
-				<RenderSingleInfo style = {width} value = {propR.resource.type}/>
-				<input value={this.state[propR.id]} type="number" onChange={e => this.changeNumber(e.target.value, propR.id)}/>
-				<RenderSingleInfo style = {width} value = {(this.state[propR.id] * filterActivePrice.s3_standard).toFixed(2)}/>
-				<RenderSingleInfo style = {width} value = {(this.state[propR.id] * filterActivePrice.s3_infrequent).toFixed(2)}/>
+			<div style={container} className="card-body">
+				<RenderSingleInfo style = { style } value = {propR.resource.type}/>
+				<input style = { styleInput } value={this.state[propR.id]} type="number" onChange={e => this.changeNumber(e.target.value, propR.id)}/>
+				<RenderSingleInfo style = { style } value = {(this.state[propR.id] * filterActivePrice.s3_standard).toFixed(2)}/>
+				<RenderSingleInfo style = { style } value = {(this.state[propR.id] * filterActivePrice.s3_infrequent).toFixed(2)}/>
 			</div>
 		)
 	}
+
+	// renderHeader() {
+	// 	return (
+	// 		this.props.d.map((ele) => {
+	// 			return(
+	// 				<RenderSingleInfo value = {ele.header} />
+	// 			)
+	// 		})
+	// 	)
+	// }
 
 	changeNumber(value, id) {
 		// console.log(value)
@@ -46,11 +70,10 @@ export default class SingleContainer extends Component {
 
 	render() {
 		return(
-			  <div className="card-body">
-				{this.renderData()}
+			  <div >
+				{ this.renderData() }
 			  </div>
 		)
-		
 	}
 }
 
